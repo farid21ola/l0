@@ -6,12 +6,12 @@ CREATE TABLE delivery (
     city VARCHAR(100),
     address VARCHAR(255),
     region VARCHAR(100),
-    email VARCHAR(255)
+    email VARCHAR(255) UNIQUE
 );
 
 CREATE TABLE payment (
     id SERIAL PRIMARY KEY,
-    transaction VARCHAR(255),
+    transaction VARCHAR(255) UNIQUE,
     request_id VARCHAR(255),
     currency VARCHAR(10),
     provider VARCHAR(100),
@@ -25,10 +25,10 @@ CREATE TABLE payment (
 
 CREATE TABLE orders (
     order_uid VARCHAR(255) PRIMARY KEY,
-    track_number VARCHAR(255),
+    track_number VARCHAR(255) UNIQUE,
     entry VARCHAR(100),
-    delivery_id INTEGER REFERENCES delivery(id),
-    payment_id INTEGER REFERENCES payment(id),
+    delivery_id INTEGER REFERENCES delivery(id) ON DELETE CASCADE,
+    payment_id INTEGER REFERENCES payment(id) ON DELETE CASCADE,
     locale VARCHAR(10),
     internal_signature VARCHAR(255),
     customer_id VARCHAR(255),
@@ -52,5 +52,5 @@ CREATE TABLE item (
     nm_id INTEGER,
     brand VARCHAR(255),
     status INTEGER,
-    order_uid VARCHAR(255) REFERENCES orders(order_uid)
+    order_uid VARCHAR(255) REFERENCES orders(order_uid) ON DELETE CASCADE
 );
