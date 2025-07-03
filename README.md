@@ -48,7 +48,7 @@ KAFKA_GROUPID=l0-consumer-group
 HTTP_PORT=8081
 
 # Логирование
-LOG_LEVEL=info
+ENV=local
 ```
 
 ### 3. Запуск инфраструктуры
